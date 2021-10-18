@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class HomeController extends Controller
 {
     public function index(){
-        $posts = Post::all();
+        $posts = Post::paginate(16);
         return view('index', compact('posts'));
 
     }
