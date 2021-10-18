@@ -1,18 +1,19 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    {!! $array[1] !!}
-    <ul>
-        @foreach($array as $value)
-            <li>{{$value}}</li>
+@extends('layout')
+@section('title', 'Home Page')
+@section('content')
+    <div class="row row-cols-4">
+        @foreach($posts as $post)
+            <div class="col">
+                <div class="card mt-3">
+                    {{--<img src="..." class="card-img-top" alt="...">--}}
+                    <div class="card-body">
+                        <h5 class="card-title">{{$post->title}}</h5>
+                        <p class="card-text">{{$post->body}}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
         @endforeach
-    </ul>
-</body>
-</html>
+    </div>
+@endsection
+
