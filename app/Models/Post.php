@@ -9,5 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    public function
+    public function getSnippetAttribute(){
+        return "hello";
+    }
 }
