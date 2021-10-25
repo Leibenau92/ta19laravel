@@ -1,5 +1,7 @@
 <?php
 
+use App/Http/Controllers/HomeController;
+use App/Http/Controllers/PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/post/{post}', [\App\Http\Controllers\HomeController::class, 'post']);
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/post/{post}', [HomeController::class, 'post']);
+Route::get('/admin/posts', [PostController::class, 'index'])->name('admin.posts.index');
 
