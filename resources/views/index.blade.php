@@ -1,28 +1,32 @@
 @extends('layout')
 @section('title', 'Home Page')
 @section('content')
-    <div>
-        @if($post->previousPageUrl())
-            <a class="btn btn-primary" href="{{$posts->previousPageUrl}}">Prev</a>
-        @endif
-        @if($post->nextPageUrl())
-            <a class="btn btn-primary float-end" href="{{$posts->nextPageUrl}}">Next</a>
-        @endif
-    </div>
-    <div class="row row-cols-4">
+    <a href="{{route('admin.posts.create')}}" class="btn btn-primary">New Posts</a>
+    {{$posts->links()}}
+    <table class="table table-striped">
+        <thead>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Created At</th>
+        <th>Modified At</th>
+        <th>Actions</th>
+        </thead>
+        <tbody>
         @foreach($posts as $post)
-            <div class="col">
-                <div class="card mt-3">
-                    {{--<img src="..." class="card-img-top" alt="...">--}}
-                    <div class="card-body">
-                        <h5 class="card-title">{{$post->title}}</h5>
-                        <p class="card-text">{{$post->snippet}}</p>
-                        <a href="/post/{{$post->id}}" class="btn btn-primary">Read more</a>
-                    </div>
-                </div>
-            </div>
+            <tr>
+                <td>{{$post->id}}</td>
+                <td>{{$post->title}}</td>
+                <td>{{$post->created_at}}</td>
+                <td>{{$post->updated_at}}</td>
+                <td>
+                    <a class="btn btn-primary">View</a>
+                    <a class="btn btn-warning">Edit</a>
+                    <a class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
         @endforeach
-    </div>
-    {{$posts->links('vendor.pagination.bootstrap-4')}}
+        </tbody>
+    </table>
+    {{$posts->links()}}
 @endsection
 

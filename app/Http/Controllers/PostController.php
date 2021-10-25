@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::paginate();
+        return response()->view('posts.index', compact('posts'));
     }
 
     /**
@@ -24,18 +26,26 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return response()->view('posts.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreatePostRequest $request)
     {
-        //
+//       $validated = $request->validate([
+//           'title' => 'required|max:255',
+//            'body' => 'required',
+//        ]);
+        $post = new Post($request->validated());
+//        $post->title = $request->input('title');
+//        $post->body = $request->input('body');
+        $post->save();
+        return redirect()->route('admin.posts.index');
     }
 
     /**
